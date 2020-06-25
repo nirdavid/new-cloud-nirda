@@ -19,15 +19,7 @@ const deleteFileFromBucket = async (params) => {
     console.log('File deleted successfully');
 }
 
-const saveFileInNewBucket = async (params) => {
-    const srcBucketName = params.Bucket;
-    const newFileName = crypto.randomBytes(16).toString("hex")+'.pdf';
-    const destparams = {
-        Bucket: srcBucketName.replace("simpleappbucket", "destbucket"),
-        Key: newFileName,
-        Body: params.Body,
-        ContentType: ContentType
-    };
+const saveFileInNewBucket = async (destparams) => {
     console.log('Dest bucket: ' + destparams.Bucket);
     console.log('Dest Key: ' + destparams.Key);
     const putResult = await s3.putObject(destparams).promise();
@@ -64,7 +56,14 @@ exports.pdfHandler = async (event, context) => {
             if (!isFilePDF) {
                 await deleteFileFromBucket(params);
             } else {
-                const newFileName = await saveFileInNewBucket(params);
+                const newFileName = crypto.randomBytes(16).toString("hex")+'.pdf';
+                const destparams = {
+                    Bucket: params.Bucket.replace("simpleappbucket", "destbucket"),
+                    Key: newFileName,
+                    Body: Body,
+                    ContentType: ContentType
+                };
+                const newFileName = await saveFileInNewBucket(destparams);
                 console.log('hi');
                 await saveFileInDB(params.Key, newFileName);
                 
