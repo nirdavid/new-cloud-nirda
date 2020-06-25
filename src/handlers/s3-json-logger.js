@@ -24,7 +24,6 @@ const saveFileInNewBucket = async (destparams) => {
     console.log('Dest Key: ' + destparams.Key);
     const putResult = await s3.putObject(destparams).promise();
     console.log('File uploaded successfully!: ' + putResult.Body);
-    return newFileName;
 }
 
 const saveFileInDB = async (oldFileName, newFileName) => {
@@ -63,7 +62,7 @@ exports.pdfHandler = async (event, context) => {
                     Body: Body,
                     ContentType: ContentType
                 };
-                const newFileName = await saveFileInNewBucket(destparams);
+                await saveFileInNewBucket(destparams);
                 console.log('hi');
                 await saveFileInDB(params.Key, newFileName);
                 
