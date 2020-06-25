@@ -19,7 +19,7 @@ Resources:
       CodeUri: ./
       Handler: src/handlers/s3-json-logger.pdfHandler
       Runtime: nodejs10.x
-      Role: !Sub: arn:aws:iam::${AWS::AccountId}:role/new-cloud-nirda-s3JsonLoggerFunctionRole-3XC1HKTUL195
+      Role: !Sub: 'arn:aws:iam::${AWS::AccountId}:role/new-cloud-nirda-s3JsonLoggerFunctionRole-7SFR3P8RIT7'
       Resource: "*"
       Description: A Lambda function that logs a json file sent to S3 bucket.
       MemorySize: 128
