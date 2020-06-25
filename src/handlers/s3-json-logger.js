@@ -19,12 +19,13 @@ const deleteFileFromBucket = async (params) => {
     console.log('File deleted successfully');
 }
 
-const saveFileInNewBucket = async (srcBucketName) => {
+const saveFileInNewBucket = async (params) => {
+    const srcBucketName = Params.Bucket;
     const newFileName = crypto.randomBytes(16).toString("hex")+'.pdf';
     const destparams = {
         Bucket: srcBucketName.replace("simpleappbucket", "destbucket"),
         Key: newFileName,
-        Body: Body,
+        Body: params.Body,
         ContentType: ContentType
     };
     console.log('Dest bucket: ' + destparams.Bucket);
@@ -63,7 +64,7 @@ exports.pdfHandler = async (event, context) => {
             if (!isFilePDF) {
                 await deleteFileFromBucket(params);
             } else {
-                const newFileName = await saveFileInNewBucket(params.Bucket);
+                const newFileName = await saveFileInNewBucket(params);
                 console.log('hi');
                 await saveFileInDB(params.Key, newFileName);
                 
