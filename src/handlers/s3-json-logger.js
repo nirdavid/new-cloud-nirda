@@ -34,13 +34,13 @@ const saveFileInNewBucket = async (srcBucketName) => {
     return newFileName;
 }
 
-// const saveFileInDB = async (oldFileName, newFileName) => {
-//     console.log(oldFileName + ' / ' + newFileName);
-//     const db = new PiDb('pi-db-dev.cjuu324bnddy.us-east-1.rds.amazonaws.com');
-//     console.log('created pi-db');
-//     const createResult = await db.create('cloud_exercise_table', defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
-//     console.log(createResult);
-// }
+const saveFileInDB = async (oldFileName, newFileName) => {
+    console.log(oldFileName + ' / ' + newFileName);
+    const db = new PiDb('pi-db-dev.cjuu324bnddy.us-east-1.rds.amazonaws.com');
+    console.log('created pi-db');
+    const createResult = await db.create('cloud_exercise_table', defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
+    console.log(createResult);
+}
 
 /**
   * A Lambda function that checks the payload received from S3, and rename it if it's pdf.
@@ -65,7 +65,7 @@ exports.deleteFileFromBucket = async (event, context) => {
             } else {
                 const newFileName = await saveFileInNewBucket(params.Bucket);
                 console.log('hi');
-                //await saveFileInDB(params.Key, newFileName);
+                await saveFileInDB(params.Key, newFileName);
                 
             }
         } catch (error) {
