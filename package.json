@@ -4,7 +4,11 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "aws-sdk": "^2.437.0"
+        "@fibotax/fibo-storage": "^1.1.0",
+        "@fibotax/log": "^1.1.1",
+        "@fibotax/pi-db": "^1.2.1",
+        "aws-sdk": "^2.437.0",
+        "crypto": "^1.0.1"
     },
     "devDependencies": {
         "aws-sdk-mock": "^4.5.0",
