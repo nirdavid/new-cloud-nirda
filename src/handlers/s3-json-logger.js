@@ -27,7 +27,7 @@ const saveFileInNewBucket = async (destparams) => {
 }
 
 const saveFileInDB = async (oldFileName, newFileName) => {
-    console.log(oldFileName + ' / ' + newFileName);
+    console.log('old file name: ' + oldFileName + ' / new file name: ' + newFileName);
     const db = new PiDb('pi-db-dev.cjuu324bnddy.us-east-1.rds.amazonaws.com');
     console.log('created pi-db');
     const createResult = await db.create('cloud_exercise_table', defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
@@ -63,7 +63,6 @@ exports.pdfHandler = async (event, context) => {
                     ContentType: ContentType
                 };
                 await saveFileInNewBucket(destparams);
-                console.log('hi');
                 await saveFileInDB(params.Key, newFileName);
                 
             }
