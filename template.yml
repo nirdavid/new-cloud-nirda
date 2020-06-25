@@ -13,24 +13,24 @@ Parameters:
     Type: String
 
 Resources:
-  # s3JsonLoggerFunction:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     CodeUri: ./
-  #     Handler: src/handlers/s3-json-logger.pdfHandler
-  #     Runtime: nodejs10.x
-  #     Description: A Lambda function that logs a json file sent to S3 bucket.
-  #     MemorySize: 128
-  #     Timeout: 60
-  #     Policies:
-  #       - S3ReadPolicy:
-  #           BucketName: !Sub aws-${AWS::Region}-${AWS::AccountId}-${AppId}-simpleappbucket
-  #     Events:
-  #       simpleappbucketEvent:
-  #         Type: S3
-  #         Properties:
-  #           Bucket: !Ref simpleappbucket
-  #           Events: s3:ObjectCreated:*
+  s3JsonLoggerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/s3-json-logger.pdfHandler
+      Runtime: nodejs10.x
+      Description: A Lambda function that logs a json file sent to S3 bucket.
+      MemorySize: 128
+      Timeout: 60
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Sub aws-${AWS::Region}-${AWS::AccountId}-${AppId}-simpleappbucket
+      Events:
+        simpleappbucketEvent:
+          Type: S3
+          Properties:
+            Bucket: !Ref simpleappbucket
+            Events: s3:ObjectCreated:*
   simpleappbucket:
     Type: AWS::S3::Bucket
     Properties:
