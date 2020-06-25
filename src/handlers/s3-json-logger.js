@@ -45,7 +45,7 @@ const saveFileInDB = async (oldFileName, newFileName) => {
 /**
   * A Lambda function that checks the payload received from S3, and rename it if it's pdf.
   */
-exports.deleteFileFromBucket = async (event, context) => {
+exports.pdfHandler = async (event, context) => {
     const getObjectRequests = event.Records.map(async (record) => {
         const params = {
             Bucket: record.s3.bucket.name,
