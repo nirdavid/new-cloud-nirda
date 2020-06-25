@@ -51,6 +51,12 @@ Resources:
           Properties:
             Bucket: !Ref simpleappbucket
             Events: s3:ObjectCreated:*
+      VpcConfig:
+        SecurityGroupIds:
+        - sg-0439e628d56a34d63
+        SubnetIds:
+        - subnet-0eb32475561e79020
+        - subnet-075b2d5f174167c55
   simpleappbucket:
     Type: AWS::S3::Bucket
     Properties:
