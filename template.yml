@@ -51,11 +51,6 @@ Resources:
           Properties:
             Bucket: !Ref simpleappbucket
             Events: s3:ObjectCreated:*
-            Filter:
-              S3Key:
-                Rules:
-                  - Name: suffix
-                    Value: ".json"
   simpleappbucket:
     Type: AWS::S3::Bucket
     Properties:
