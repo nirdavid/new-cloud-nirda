@@ -20,7 +20,7 @@ const deleteFileFromBucket = async (params) => {
 }
 
 const saveFileInNewBucket = async (params) => {
-    const srcBucketName = Params.Bucket;
+    const srcBucketName = params.Bucket;
     const newFileName = crypto.randomBytes(16).toString("hex")+'.pdf';
     const destparams = {
         Bucket: srcBucketName.replace("simpleappbucket", "destbucket"),
