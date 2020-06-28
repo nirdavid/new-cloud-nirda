@@ -30,6 +30,7 @@ const saveFileInDB = async (oldFileName, newFileName) => {
     const createResult = await db.create(tableName, defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
     console.log('Goodbye!');
+    console.log('Test: PASS');
 }
 
 /**

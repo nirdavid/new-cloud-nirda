@@ -20,10 +20,10 @@ describe('Test for s3-json-logger', () => {
                 {
                     s3: {
                         bucket: {
-                            name: 'simpleappbucket',
+                            name: 'aws-us-east-1-722379266774-new-cloud-nirda-simpleappbucket',
                         },
                         object: {
-                            key: 'test-key',
+                            key: 'test-key.json',
                         },
                     },
                 },
