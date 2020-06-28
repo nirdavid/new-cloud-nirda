@@ -4,9 +4,6 @@ const AWS = require('aws-sdk-mock');
 describe('Test for nirda-cloud-exercise', () => {
 
     console.log = jest.fn();
-
-     // Import all functions from s3-json-logger.js. The imported module uses the mock AWS SDK
-     const s3JsonLogger = require('../../../src/handlers/s3-json-logger.js');
     
     it('Verifies the object is read and the payload is uploaded', async () => {
         const objectBody = 'DATA';
@@ -17,14 +14,14 @@ describe('Test for nirda-cloud-exercise', () => {
         AWS.mock('S3', 'putObject', (params, callback) => {
             callback(null, {});
         });
-        AWS.mock('S3', 'deleteObject', (params, callback) => {
-            callback(null, {});
-        });
         jest.mock('@fibotax/pi-db', () => {
             return jest.fn().mockImplementation(() => {
                 return {create: jest.fn()};
             });
         });
+
+        // Import all functions from s3-json-logger.js. The imported module uses the mock AWS SDK
+        const s3JsonLogger = require('../../../src/handlers/s3-json-logger.js');
 
         const event = {
             Records: [
@@ -64,8 +61,8 @@ describe('Test for nirda-cloud-exercise', () => {
             callback(null, {});
         });
 
-
-        console.log = jest.fn();
+        // Import all functions from s3-json-logger.js. The imported module uses the mock AWS SDK
+        const s3JsonLogger = require('../../../src/handlers/s3-json-logger.js');
 
         const event = {
             Records: [
