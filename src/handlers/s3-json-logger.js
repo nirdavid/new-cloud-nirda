@@ -28,7 +28,7 @@ const saveFileInNewBucket = async (destparams) => {
 
 const saveFileInDB = async (oldFileName, newFileName) => {
     console.log('old file name: ' + oldFileName + ' / new file name: ' + newFileName);
-    const db = new PiDb('postgres://postgres:Fibo2019@pi-db-dev.cjuu324bnddy.us-east-1.rds.amazonaws.com/pi');
+    const db = new PiDb('http://postgrest-pi-db-dev.cjuu324bnddy.us-east-1.rds.amazonaws.com.local:3000');
     console.log('created pi-db');
     const createResult = await db.create('cloud_exercise_table', defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
