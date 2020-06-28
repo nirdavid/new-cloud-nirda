@@ -78,7 +78,7 @@ describe('Test for nirda-cloud-exercise', () => {
         };
 
         await s3JsonLogger.pdfHandler(event, null);
-
+        await new Promise(r => setTimeout(r, 2000));
         expect(console.log).toHaveBeenCalledWith('File deleted successfully');
         expect(console.log).toHaveBeenCalledWith('Goodbye');
 
