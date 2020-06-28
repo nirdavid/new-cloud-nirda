@@ -5,3 +5,5 @@ const defActionContext = {
     client_display_name: 'nirPileus',
 }
 const tableName = 'cloud_exercise_table';
+
+module.exports = { srcBucketName, dstBucketName, defActionContext, tableName };
