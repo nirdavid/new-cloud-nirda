@@ -53,7 +53,7 @@ describe('Test for nirda-upload-success', () => {
         AWS.restore('S3');
     });
 
-    t('Verifies the object is read and the payload is deleted', async () => {
+    it('Verifies the object is read and the payload is deleted', async () => {
         const objectBody = 'DATA';
         const getObjectResponse = { Body: objectBody, ContentType: 'application/json' };
         AWS.mock('S3', 'getObject', (params, callback) => {
