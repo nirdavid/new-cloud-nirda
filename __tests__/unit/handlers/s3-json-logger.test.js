@@ -48,6 +48,8 @@ describe('Test for s3-json-logger', () => {
 
         // Verify that console.log has been called with the expected payload
         expect(console.log).toHaveBeenCalledWith('File uploaded successfully!');
+        expect(console.log).toHaveBeenCalledWith('dummy.pdf');
+        expect(console.log).toHaveBeenCalledWith('created pi-db');
 
         AWS.restore('S3');
     });
