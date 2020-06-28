@@ -1,7 +1,7 @@
 // Import mock AWS SDK from aws-sdk-mock
 const AWS = require('aws-sdk-mock');
 
-describe('Test for nirda-upload-success', () => {
+describe('Test for nirda-cloud-exercise', () => {
 
     AWS.mock('S3', 'putObject', (params, callback) => {
         callback(null, {});
