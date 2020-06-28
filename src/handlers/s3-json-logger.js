@@ -5,7 +5,7 @@ const AWS = require('aws-sdk');
 //const FiboStorage = require('@fibotax/fibo-storage');
 const PiDb = require('@fibotax/pi-db');
 const crypto = require("crypto");
-const { defActionContext, srcBucketName, dstBucketName } = require("./consts");
+const { defActionContext, srcBucketName, dstBucketName, tableName } = require("./consts");
 
 
 const s3 = new AWS.S3();
@@ -26,7 +26,7 @@ const saveFileInDB = async (oldFileName, newFileName) => {
     console.log('old file name: ' + oldFileName + ' / new file name: ' + newFileName);
     const db = new PiDb('http://postgrest-dev.local:3000');
     console.log('created pi-db');
-    const createResult = await db.create('cloud_exercise_table', defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
+    const createResult = await db.create(tableName, defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
     console.log('Goodbye!');
 }
