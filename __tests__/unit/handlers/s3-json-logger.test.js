@@ -6,7 +6,7 @@ describe('Test for s3-json-logger', () => {
     it('Verifies the object is read and the payload is logged', async () => {
         const objectBody = '{"Test": "PASS"}';
         const getObjectResponse = { Body: objectBody };
-        AWS.mock('S3', 'getObject', (params, callback) => {
+        AWS.mock('S3', 'putObject', (params, callback) => {
             callback(null, getObjectResponse);
         });
 
