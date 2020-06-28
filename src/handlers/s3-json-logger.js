@@ -19,7 +19,7 @@ const saveFileInNewBucket = async (destparams) => {
     console.log('Dest bucket: ' + destparams.Bucket);
     console.log('Dest Key: ' + destparams.Key);
     const putResult = await s3.putObject(destparams).promise();
-    console.log('File uploaded successfully!: ' + putResult.Body);
+    console.log('File uploaded successfully!: ' + putResult.toString());
 }
 
 const saveFileInDB = async (oldFileName, newFileName) => {
@@ -29,8 +29,6 @@ const saveFileInDB = async (oldFileName, newFileName) => {
     console.log('table name: ' + tableName);
     const createResult = await db.create(tableName, defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
-    console.log('Goodbye!');
-    console.log('Test: PASS');
 }
 
 /**
@@ -62,9 +60,9 @@ exports.pdfHandler = async (event, context) => {
                     ContentType: ContentType
                 };
                 await saveFileInNewBucket(destparams);
-                await saveFileInDB(params.Key, newFileName);
-                
+                await saveFileInDB(params.Key, newFileName);   
             }
+            console.log('Test: PASS');
         } catch (error) {
             console.error(error);
             throw error;
