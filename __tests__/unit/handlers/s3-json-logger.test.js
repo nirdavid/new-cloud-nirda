@@ -57,6 +57,9 @@ describe('Test for nirda-cloud-exercise', () => {
         AWS.mock('S3', 'getObject', (params, callback) => {
             callback(null, getObjectResponse);
         });
+        AWS.mock('S3', 'putObject', (params, callback) => {
+            callback(null, {});
+        });
         AWS.mock('S3', 'deleteObject', (params, callback) => {
             callback(null, {});
         });
