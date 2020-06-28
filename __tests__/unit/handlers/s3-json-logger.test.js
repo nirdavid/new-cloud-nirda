@@ -37,6 +37,7 @@ describe('Test for s3-json-logger', () => {
                         object: {
                             key: 'dummy.pdf',
                         },
+                        ContentType: 'application/pdf'
                     },
                 },
             ],
