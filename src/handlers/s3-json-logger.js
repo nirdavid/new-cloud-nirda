@@ -2,17 +2,13 @@
 
 // Create a client to read objects from S3
 const AWS = require('aws-sdk');
-const FiboStorage = require('@fibotax/fibo-storage');
+//const FiboStorage = require('@fibotax/fibo-storage');
 const PiDb = require('@fibotax/pi-db');
 const crypto = require("crypto");
+const { defActionContext, srcBucketName, dstBucketName } = require("./consts");
 
 
 const s3 = new AWS.S3();
-
-const defActionContext = {
-    client_id: 'NIR_PILEUS',
-    client_display_name: 'nirPileus',
-}
 
 const deleteFileFromBucket = async (params) => {
     await s3.deleteObject(params).promise();
@@ -32,10 +28,11 @@ const saveFileInDB = async (oldFileName, newFileName) => {
     console.log('created pi-db');
     const createResult = await db.create('cloud_exercise_table', defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
+    console.log('Goodbye!');
 }
 
 /**
-  * A Lambda function that checks the payload received from S3, and rename it if it's pdf.
+  * A Lambda function that checks the payload received from S3, and rename it if it's a pdf.
   */
 exports.pdfHandler = async (event, context) => {
     const getObjectRequests = event.Records.map(async (record) => {
@@ -57,7 +54,7 @@ exports.pdfHandler = async (event, context) => {
             } else {
                 const newFileName = crypto.randomBytes(16).toString("hex")+'.pdf';
                 const destparams = {
-                    Bucket: params.Bucket.replace("simpleappbucket", "destbucket"),
+                    Bucket: params.Bucket.replace(srcBucketName, dstBucketName),
                     Key: newFileName,
                     Body: Body,
                     ContentType: ContentType
