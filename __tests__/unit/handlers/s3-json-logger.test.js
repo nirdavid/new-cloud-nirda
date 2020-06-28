@@ -17,6 +17,9 @@ describe('Test for nirda-cloud-exercise', () => {
         AWS.mock('S3', 'putObject', (params, callback) => {
             callback(null, {});
         });
+        AWS.mock('S3', 'deleteObject', (params, callback) => {
+            callback(null, {});
+        });
         jest.mock('@fibotax/pi-db', () => {
             return jest.fn().mockImplementation(() => {
                 return {create: jest.fn()};
