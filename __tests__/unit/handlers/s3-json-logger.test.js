@@ -3,14 +3,6 @@ const AWS = require('aws-sdk-mock');
 
 describe('Test for nirda-cloud-exercise', () => {
 
-    AWS.mock('S3', 'putObject', (params, callback) => {
-        callback(null, {});
-    });
-    jest.mock('@fibotax/pi-db', () => {
-        return jest.fn().mockImplementation(() => {
-            return {create: jest.fn()};
-        });
-    });
     console.log = jest.fn();
 
      // Import all functions from s3-json-logger.js. The imported module uses the mock AWS SDK
@@ -21,6 +13,14 @@ describe('Test for nirda-cloud-exercise', () => {
         const getObjectResponse = { Body: objectBody, ContentType: 'application/pdf' };
         AWS.mock('S3', 'getObject', (params, callback) => {
             callback(null, getObjectResponse);
+        });
+        AWS.mock('S3', 'putObject', (params, callback) => {
+            callback(null, {});
+        });
+        jest.mock('@fibotax/pi-db', () => {
+            return jest.fn().mockImplementation(() => {
+                return {create: jest.fn()};
+            });
         });
 
         const event = {
