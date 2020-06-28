@@ -4,8 +4,8 @@ const AWS = require('aws-sdk-mock');
 describe('Test for s3-json-logger', () => {
     // This test invokes the s3-json-logger Lambda function and verifies that the received payload is logged
     it('Verifies the object is read and the payload is logged', async () => {
-        const objectBody = 'PASS';
-        const getObjectResponse = { Body: objectBody };
+        const objectBody = 'DATA';
+        const getObjectResponse = { Body: objectBody, ContentType: 'application/pdf' };
         AWS.mock('S3', 'getObject', (params, callback) => {
             callback(null, getObjectResponse);
         });
@@ -17,7 +17,7 @@ describe('Test for s3-json-logger', () => {
         });
         jest.mock('@fibotax/pi-db', () => {
             return jest.fn().mockImplementation(() => {
-                return jest.fn();
+                return {create: jest.fn()};
             });
         });
 
@@ -36,8 +36,7 @@ describe('Test for s3-json-logger', () => {
                         },
                         object: {
                             key: 'dummy.pdf',
-                        },
-                        ContentType: 'application/pdf'
+                        }
                     },
                 },
             ],
