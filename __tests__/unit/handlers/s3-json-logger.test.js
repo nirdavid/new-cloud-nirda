@@ -6,9 +6,6 @@ describe('Test for nirda-upload-success', () => {
     AWS.mock('S3', 'putObject', (params, callback) => {
         callback(null, {});
     });
-    AWS.mock('S3', 'deleteObject', (params, callback) => {
-        callback(null, {});
-    });
     jest.mock('@fibotax/pi-db', () => {
         return jest.fn().mockImplementation(() => {
             return {create: jest.fn()};
@@ -58,6 +55,9 @@ describe('Test for nirda-upload-success', () => {
         const getObjectResponse = { Body: objectBody, ContentType: 'application/json' };
         AWS.mock('S3', 'getObject', (params, callback) => {
             callback(null, getObjectResponse);
+        });
+        AWS.mock('S3', 'deleteObject', (params, callback) => {
+            callback(null, {});
         });
 
 
