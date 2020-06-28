@@ -23,7 +23,7 @@ describe('Test for s3-json-logger', () => {
                             name: 'aws-us-east-1-722379266774-new-cloud-nirda-simpleappbucket',
                         },
                         object: {
-                            key: 'dummy.pdf',
+                            key: 'dummy.pddf',
                         },
                     },
                 },
