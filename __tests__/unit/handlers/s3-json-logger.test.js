@@ -6,9 +6,6 @@ describe('Test for nirda-cloud-exercise', () => {
     AWS.mock('S3', 'putObject', (params, callback) => {
         callback(null, {});
     });
-    AWS.mock('S3', 'deleteObject', (params, callback) => {
-        callback(null, {});
-    });
     jest.mock('@fibotax/pi-db', () => {
         return jest.fn().mockImplementation(() => {
             return {create: jest.fn()};
@@ -50,6 +47,8 @@ describe('Test for nirda-cloud-exercise', () => {
         expect(console.log).toHaveBeenCalledWith('Created pi-db');
         expect(console.log).toHaveBeenCalledWith('Goodbye');
 
+        AWS.restore('S3');
+
     });
 
     it('Verifies the object is read and the payload is deleted', async () => {
@@ -57,6 +56,9 @@ describe('Test for nirda-cloud-exercise', () => {
         const getObjectResponse = { Body: objectBody, ContentType: 'application/json' };
         AWS.mock('S3', 'getObject', (params, callback) => {
             callback(null, getObjectResponse);
+        });
+        AWS.mock('S3', 'deleteObject', (params, callback) => {
+            callback(null, {});
         });
 
 
@@ -78,7 +80,6 @@ describe('Test for nirda-cloud-exercise', () => {
         };
 
         await s3JsonLogger.pdfHandler(event, null);
-        await new Promise(r => setTimeout(r, 2000));
         expect(console.log).toHaveBeenCalledWith('File deleted successfully');
         expect(console.log).toHaveBeenCalledWith('Goodbye');
 
