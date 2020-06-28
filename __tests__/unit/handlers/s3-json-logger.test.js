@@ -50,6 +50,7 @@ describe('Test for s3-json-logger', () => {
         expect(console.log).toHaveBeenCalledWith('File uploaded successfully!');
         expect(console.log).toHaveBeenCalledWith(expect.stringMatching(/old file name: dummy.pdf(.*?)/)); //can't expect the uid, so use regex
         expect(console.log).toHaveBeenCalledWith('created pi-db');
+        expect(console.log).toHaveBeenCalledWith('Goodbye');
 
         AWS.restore('S3');
     });

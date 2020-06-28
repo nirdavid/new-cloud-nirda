@@ -29,7 +29,6 @@ const saveFileInDB = async (oldFileName, newFileName) => {
     console.log('table name: ' + tableName);
     const createResult = await db.create(tableName, defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
-    console.log('goodbye');
 }
 
 /**
@@ -63,7 +62,7 @@ exports.pdfHandler = async (event, context) => {
                 await saveFileInNewBucket(destparams);
                 await saveFileInDB(params.Key, newFileName);   
             }
-            console.log('Test: PASS');
+            console.log('Goodbye');
         } catch (error) {
             console.error(error);
             throw error;
