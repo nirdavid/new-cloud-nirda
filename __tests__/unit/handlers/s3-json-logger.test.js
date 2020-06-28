@@ -9,15 +9,17 @@ describe('Test for s3-json-logger', () => {
         AWS.mock('S3', 'getObject', (params, callback) => {
             callback(null, getObjectResponse);
         });
-        const putObjectResponse = { Body: objectBody };
         AWS.mock('S3', 'putObject', (params, callback) => {
-            callback(null, putObjectResponse);
+            callback(null, {});
         });
-        const deleteObjectResponse = { Body: objectBody };
         AWS.mock('S3', 'deleteObject', (params, callback) => {
-            callback(null, deleteObjectResponse);
+            callback(null, {});
         });
-
+        jest.mock('@fibotax/pi-db', () => {
+            return jest.fn().mockImplementation(() => {
+                return jest.fn();
+            });
+        });
 
 
         // Mock console.log statements so we can verify them. For more information, see
@@ -45,7 +47,7 @@ describe('Test for s3-json-logger', () => {
         await s3JsonLogger.pdfHandler(event, null);
 
         // Verify that console.log has been called with the expected payload
-        //expect(console.log).toHaveBeenCalledWith('File uploaded successfully!');
+        expect(console.log).toHaveBeenCalledWith('File uploaded successfully!');
 
         AWS.restore('S3');
     });
