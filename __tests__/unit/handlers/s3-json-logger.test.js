@@ -35,7 +35,7 @@ describe('Test for s3-json-logger', () => {
         await s3JsonLogger.pdfHandler(event, null);
 
         // Verify that console.log has been called with the expected payload
-        //expect(console.log).toHaveBeenCalledWith(objectBody);
+        expect(console.log).toHaveBeenCalledWith(objectBody);
 
         AWS.restore('S3');
     });
