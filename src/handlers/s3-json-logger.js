@@ -26,6 +26,7 @@ const saveFileInDB = async (oldFileName, newFileName) => {
     console.log('old file name: ' + oldFileName + ' / new file name: ' + newFileName);
     const db = new PiDb('http://postgrest-dev.local:3000');
     console.log('created pi-db');
+    console.log('table name: ' + tableName);
     const createResult = await db.create(tableName, defActionContext, {file_old_name: oldFileName, file_new_name: newFileName});
     console.log(createResult);
     console.log('Goodbye!');
