@@ -18,8 +18,8 @@ const deleteFileFromBucket = async (params) => {
 const saveFileInNewBucket = async (destparams) => {
     console.log('Dest bucket: ' + destparams.Bucket);
     console.log('Dest Key: ' + destparams.Key);
-    const putResult = await s3.putObject(destparams).promise();
-    console.log('File uploaded successfully!: ' + putResult.toString());
+    await s3.putObject(destparams).promise();
+    console.log('File uploaded successfully!');
 }
 
 const saveFileInDB = async (oldFileName, newFileName) => {
